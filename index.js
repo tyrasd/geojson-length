@@ -1,8 +1,8 @@
-module.exports = function(feature) {
-    if (feature.type === 'LineString')
-        return calculateLength(feature.coordinates);
-    else if (feature.type === 'MultiLineString')
-        return calculateLength.reduce(function(memo, coordinates) {
+module.exports = function(geometry) {
+    if (geometry.type === 'LineString')
+        return calculateLength(geometry.coordinates);
+    else if (geometry.type === 'MultiLineString')
+        return geometry.coordinates.reduce(function(memo, coordinates) {
             return memo + calculateLength(coordinates);
         }, 0);
     else
